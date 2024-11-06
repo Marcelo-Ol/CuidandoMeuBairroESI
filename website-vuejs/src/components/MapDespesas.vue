@@ -200,9 +200,9 @@ export default {
       }
     },
     async locateAddress() {
-      let base = "https://nominatim.openstreetmap.org/search/";
+      let base = "https://nominatim.openstreetmap.org/search?q=";
       let query =
-        "?format=json&limit=1&countrycodes=br&viewbox=-47.16,-23.36,-45.97,-23.98&bounded=1";
+        "&format=json&limit=1&countrycodes=br&viewbox=-47.16,-23.36,-45.97,-23.98&bounded=1";
       let url = base + this.searchAddress + query;
       let json = (await axios.get(url)).data;
       if (json) {
