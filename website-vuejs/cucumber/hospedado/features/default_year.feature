@@ -9,5 +9,3 @@ Feature: Exibir ano atual
     Given que estou na página inicial do site "https://cuidando.vc/"
     When a página carrega completamente
     Then o ano do seletor de ano deve ser o atual
-
-# obs: teste falhando 
