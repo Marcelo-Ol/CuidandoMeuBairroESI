@@ -19,7 +19,7 @@ jobs:
     - name: Configurar Node.js versão 14
       uses: actions/setup-node@v3
       with:
-        node-version: '14'  
+        node-version: '14'
 
     - name: Instalar dependências
       run: |
@@ -29,16 +29,24 @@ jobs:
     - name: Rodar os testes de caracterização
       run: |
         cd website-vuejs
-        npm run jest  
+        npm run jest
 
     - name: Configurar Node.js versão 20 para Cucumber
       uses: actions/setup-node@v3
       with:
-        node-version: '20' 
+        node-version: '20'
+
+    - name: Instalar dependências do Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget curl unzip
+        sudo apt-get install -y google-chrome-stable
+        sudo apt-get install -y chromium-chromedriver
 
     - name: Rodar os testes de aceitação (Cucumber)
       run: |
         cd website-vuejs/cucumber/hospedado/
-        npx cucumber-js  # Rodar os testes de aceitação no site hospedado
+        DISPLAY=:99 npx cucumber-js  # Rodar os testes de aceitação no site hospedado
+
         cd ../local/
-        npx cucumber-js  # Rodar os testes de aceitação local
+        DISPLAY=:99 npx cucumber-js  # Rodar os testes de aceitação local
