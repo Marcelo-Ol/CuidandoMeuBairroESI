@@ -14,3 +14,37 @@ Projeto acadêmico referente a disciplina de Engenharia de Sistemas de Informaç
 - Matheus Ferreira Germano
 - Victor Queiroga de Carvalho
 - Willian Silva Nascimento de Jesus
+
+## PRÉ REQUISITOS
+node instalado
+nvm instalado
+python instalado
+
+OBS: Considere que cada tópico abaixo parte do princípio que você está na pasta raiz do projeto
+
+## INSTALAÇÃO
+cd website-vuejs/
+nvm install 14
+nvm use 14 
+npm install
+
+## RODAR SERVIDOR LOCAL
+cd website-vuejs/
+npm run serve
+
+## TESTES DE ACEITAÇÃO
+Para utilizar o Cucumber  é necessário usar uma versão do node 18+
+nvm install 20
+nvm use 20
+
+## TESTES DE ACEITAÇÃO SITE HOSPEDADO
+cd website-vuejs/cucumber/hospedado/ 
+npx cucumber-js
+
+## TESTES DE ACEITAÇÃO LOCAL
+cd website-vuejs/cucumber/local/ 
+npx cucumber-js
+
+## TESTES DE CARACTERIZAÇÃO 
+cd website-vuejs/
+npm run jest
