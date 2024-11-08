@@ -3,36 +3,50 @@ name: CI Workflow
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Fazer checkout do código
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Instalar nvm (Node Version Manager)
-      run: |
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-        source ~/.bashrc
-        nvm install 14  # Instalar a versão 14 do Node.js
-        nvm use 14
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
 
-    - name: Instalar dependências
+    - name: Install Node.js 14 and dependencies
       run: |
-        cd website-vuejs
+        cd website-vuejs/
+        nvm install 14
+        nvm use 14
         npm install
 
-    - name: Rodar os testes
+    - name: Run local server
       run: |
+        cd website-vuejs/
+        npm run serve &  # Inicia o servidor em background
+
+    - name: Run acceptance tests (hosted)
+      run: |
+        nvm install 20
+        nvm use 20
         cd website-vuejs/cucumber/hospedado/
-        npx cucumber-js  # Testes de aceitação hospedado
-        cd ../local/
-        npx cucumber-js  # Testes de aceitação local
-        cd ../..
-        npm run jest  # Testes de caracterização
+        npx cucumber-js
+
+    - name: Run acceptance tests (local)
+      run: |
+        nvm use 20
+        cd website-vuejs/cucumber/local/
+        npx cucumber-js
+
+    - name: Run characterization tests
+      run: |
+        cd website-vuejs/
+        npm run jest
