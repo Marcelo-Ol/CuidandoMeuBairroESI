@@ -16,21 +16,29 @@ jobs:
     - name: Fazer checkout do código
       uses: actions/checkout@v3
 
-    - name: Configurar Node.js
+    - name: Configurar Node.js versão 14
       uses: actions/setup-node@v3
       with:
-        node-version: '14' 
+        node-version: '14'  
 
     - name: Instalar dependências
       run: |
         cd website-vuejs
         npm install
 
-    - name: Rodar os testes
+    - name: Rodar os testes de caracterização
+      run: |
+        cd website-vuejs
+        npm run jest  
+
+    - name: Configurar Node.js versão 20 para Cucumber
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20' 
+
+    - name: Rodar os testes de aceitação (Cucumber)
       run: |
         cd website-vuejs/cucumber/hospedado/
         npx cucumber-js  # Rodar os testes de aceitação no site hospedado
         cd ../local/
         npx cucumber-js  # Rodar os testes de aceitação local
-        cd ../..
-        npm run jest  # Rodar os testes de caracterização com Jest
