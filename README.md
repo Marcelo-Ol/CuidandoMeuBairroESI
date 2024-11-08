@@ -1,7 +1,7 @@
 # Projeto Cuidando do Meu Bairro
 
 [![Code Climate - Maintainability](https://api.codeclimate.com/v1/badges/cf0f9b5b94b02433b155/maintainability)](https://codeclimate.com/github/Marcelo-Ol/CuidandoMeuBairroESI/maintainability)
-[![Github Actions]()
+[![Github Actions - CI Workflow](https://github.com/Marcelo-Ol/CuidandoMeuBairroESI/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Marcelo-Ol/CuidandoMeuBairroESI/actions/workflows/ci.yml)
 
 ## Descrição
 
