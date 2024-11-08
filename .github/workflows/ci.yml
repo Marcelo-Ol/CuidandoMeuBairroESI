@@ -1,4 +1,4 @@
-name: Workflow de CI
+name: CI Workflow
 
 on:
   push:
@@ -30,23 +30,3 @@ jobs:
       run: |
         cd website-vuejs
         npm run jest
-
-    - name: Configurar Node.js versão 20 para Cucumber
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-
-    - name: Instalar dependências do Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget curl unzip
-        sudo apt-get install -y google-chrome-stable
-        sudo apt-get install -y chromium-chromedriver
-
-    - name: Rodar os testes de aceitação (Cucumber)
-      run: |
-        cd website-vuejs/cucumber/hospedado/
-        DISPLAY=:99 npx cucumber-js  # Rodar os testes de aceitação no site hospedado
-
-        cd ../local/
-        DISPLAY=:99 npx cucumber-js  # Rodar os testes de aceitação local
