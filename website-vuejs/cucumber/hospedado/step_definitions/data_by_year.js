@@ -1,6 +1,8 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const { By } = require("selenium-webdriver");
+const { Given, When, Then, setDefaultTimeout } = require("@cucumber/cucumber");
+const { By, until } = require("selenium-webdriver");
 const assert = require("assert");
+
+setDefaultTimeout(60000);
 
 Given('que estou na página {string}', async function (url) {
     await this.driver.get(url);
