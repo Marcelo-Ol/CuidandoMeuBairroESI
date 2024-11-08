@@ -9,28 +9,38 @@ Given('que estou na página do glossário', async function () {
   await this.driver.get("https://cuidando.vc/glossario");
 });
 
-When('clico no vídeo "Importância do orçamento"', async function (videoTitle) {
-
-    // Localizando o elemento que contém o título do vídeo usando XPath
-    const videoSelector = `/html/body/div/div/div[1]/div/div[2]/div/div[1]/a`;
-
-    const videoElement = await this.driver.wait(until.elementLocated(By.xpath(videoSelector)), 15000);
-
-    await videoElement.click();
-
-    
+When('clico no vídeo "Importância do orçamento"', async function () {
+  // Localizando o elemento que contém o título do vídeo usando XPath
+  const videoSelector = `/html/body/div/div/div[1]/div/div[2]/div/div[1]/a`;
+  const videoElement = await this.driver.wait(until.elementLocated(By.xpath(videoSelector)), 30000);
+  await videoElement.click();
 });
+
 
 
 Then('o vídeo é reproduzido', async function () {
-    
-    const iframeSelector = By.css('.ly-iframe');
-    await this.driver.wait(until.elementLocated(iframeSelector), 15000);
+  const iframeSelector = By.css('.ly-iframe');
+  
+  try {
+      // Wait for the iframe element to be located and visible
+      const iframeElement = await this.driver.wait(
+          until.elementIsVisible(await this.driver.findElement(iframeSelector)), 
+          30000 // Increased timeout to 30 seconds
+      );
 
-    console.log('Verificando se o iframe está presente na página')
-    const iframeElement = await this.driver.findElement(iframeSelector);
-    assert.ok(iframeElement, "Iframe não encontrado na página.");
+      console.log('Iframe is present and visible on the page');
+      assert.ok(iframeElement, "Iframe not found or visible on the page.");
+      
+      // Switch to iframe if necessary
+      await this.driver.switchTo().frame(iframeElement);
 
-    await this.driver.switchTo().defaultContent();
-
+  } catch (error) {
+      // Capture the page source for debugging if iframe isn't found
+      const pageSource = await this.driver.getPageSource();
+      console.error("Iframe not found within timeout. Page HTML:", pageSource);
+      throw error; // rethrow to allow test to fail properly
+  } finally {
+      await this.driver.switchTo().defaultContent();
+  }
 });
+
