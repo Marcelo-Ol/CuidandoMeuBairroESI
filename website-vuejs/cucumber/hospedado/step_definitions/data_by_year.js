@@ -10,12 +10,18 @@ Given('que estou na página {string}', async function (url) {
 
 
 When('eu selecionar o ano 2003 no seletor de ano', async function() {
-    const button = await this.driver.findElement(
-        By.css('button[data-dropdown-toggle="dropdownYear"]')
+
+    const button = await this.driver.wait(
+        until.elementLocated(By.css('button[data-dropdown-toggle="dropdownYear"]')),
+        10000 // Tempo de espera em milissegundos
     );
+
     await button.click();
 
-    const selectYear = await this.driver.findElement(By.css('#navbar > ul > li:nth-child(6) > div > div > ul > li:nth-child(1)'));
+    const selectYear = await this.driver.wait(
+        until.elementLocated(By.css('#navbar > ul > li:nth-child(6) > div > div > ul > li:nth-child(1)')),
+        10000
+    );
     await selectYear.click();
 })
 
