@@ -15,47 +15,72 @@ Projeto acadêmico referente a disciplina de Engenharia de Sistemas de Informaç
 - Victor Queiroga de Carvalho
 - Willian Silva Nascimento de Jesus
 
-## PRÉ REQUISITOS
-node instalado
+## Pré-requisitos
 
-nvm instalado
+Antes de começar, certifique-se de que você possui as seguintes ferramentas instaladas:
 
-python instalado
+- **Node.js**
+- **NVM (Node Version Manager)**
+- **Python**
 
-OBS: Considere que cada tópico abaixo parte do princípio que você está na pasta raiz do projeto
+> **Observação:** Todos os comandos abaixo assumem que você está executando-os a partir da pasta raiz do projeto.
 
-## INSTALAÇÃO
-cd website-vuejs/
+## Instalação
 
-nvm install 14
+- Configuração do ambiente e instalação das dependências do projeto.
 
-nvm use 14 
+   ```bash
+     cd website-vuejs
+  ``` 
+  ```bash
+    nvm install 14  
+    nvm use 14
+  ```
+  ```bash
+    npm install
+  ```
 
-npm install
+## Executar o Servidor Local
 
-## RODAR SERVIDOR LOCAL
-cd website-vuejs/
+- Comandos para iniciar o servidor local e rodar a aplicação.
 
-npm run serve
+   ```bash
+   cd website-vuejs
+   npm run serve
+  ``` 
 
-## TESTES DE ACEITAÇÃO
-Para utilizar o Cucumber  é necessário usar uma versão do node 18+
+## Testes de Aceitação
 
-nvm install 20
+- Configuração e execução dos testes de aceitação com Cucumber, exigindo Node.js versão 18+.
+  
+   ```bash
+    nvm install 20
+    nvm use 20
+  ``` 
 
-nvm use 20
+### Testes de Aceitação do Site Hospedado
 
-## TESTES DE ACEITAÇÃO SITE HOSPEDADO
-cd website-vuejs/cucumber/hospedado/ 
+- Execução dos testes na versão hospedada do site.
+  
+   ```bash
+    cd website-vuejs/cucumber/hospedado
+    npx cucumber-js
+  ``` 
 
-npx cucumber-js
+### Testes de Aceitação Local
 
-## TESTES DE ACEITAÇÃO LOCAL
-cd website-vuejs/cucumber/local/ 
+- Execução dos testes na versão local do site.
+  
+   ```bash
+    cd website-vuejs/cucumber/local
+    npx cucumber-js
+  ``` 
 
-npx cucumber-js
+## Testes de Caracterização
 
-## TESTES DE CARACTERIZAÇÃO 
-cd website-vuejs/
+- Execução dos testes de caracterização com Jest.
 
-npm run jest
+   ```bash
+    cd website-vuejs
+    npm run jest
+  ``` 
