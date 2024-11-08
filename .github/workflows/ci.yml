@@ -1,0 +1,52 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install Node.js 14 and dependencies
+      run: |
+        cd website-vuejs/
+        nvm install 14
+        nvm use 14
+        npm install
+
+    - name: Run local server
+      run: |
+        cd website-vuejs/
+        npm run serve &  # Inicia o servidor em background
+
+    - name: Run acceptance tests (hosted)
+      run: |
+        nvm install 20
+        nvm use 20
+        cd website-vuejs/cucumber/hospedado/
+        npx cucumber-js
+
+    - name: Run acceptance tests (local)
+      run: |
+        nvm use 20
+        cd website-vuejs/cucumber/local/
+        npx cucumber-js
+
+    - name: Run characterization tests
+      run: |
+        cd website-vuejs/
+        npm run jest
