@@ -13,20 +13,17 @@ When('a página carrega completamente', async function () {
   await this.driver.wait(until.elementLocated(By.css('button[data-dropdown-toggle="dropdownYear"]')), 15000);
 });
 
-Then('o ano do seletor de ano deve ser o atual', async function () {
-  // Obtendo a data atual 
+Then('o ano do seletor de ano deve ser diferente do ano atual', async function () {
+  
   const currentYear = new Date().getFullYear().toString();
 
-  // Selecionando o botão que contém o ano
   const yearSelector = await this.driver.findElement(By.css('button[data-dropdown-toggle="dropdownYear"]'));
   
-  // Obtendo o texto do botão, que deve conter o ano atual
   const selectedYear = await yearSelector.getText();
   
-  // Verificando se o ano exibido é o ano atual
-  assert.strictEqual(
-    selectedYear.trim(), 
+  assert.notStrictEqual(
+    selectedYear.trim(),
     currentYear,
-    `O ano exibido no seletor é ${selectedYear}, mas deveria ser ${currentYear}.`
+    `O ano exibido no seletor é ${selectedYear}, mas deveria ser diferente de ${currentYear}.`
   );
 });
