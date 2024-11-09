@@ -14,7 +14,10 @@ export default {
   name: 'year-select',
   computed: {
     options () {
-      return this.years.map((x) => { return { key: x, value: x } })
+      return this.years
+      .slice() 
+      .sort((a, b) => b - a) 
+      .map((x) => { return { key: x, value: x } })
     },
     ...mapState({
       years: state => state.money.years,
